@@ -86,18 +86,17 @@ let data = [
 //END 全域變數
 
 // common function
-$.fn.pressEnter = function(fn) {  
+$.fn.pressEnter = function (fn) {
 
-  return this.each(function() {  
-      $(this).bind('enterPress', fn);
-      $(this).keyup(function(e){
-          if(e.keyCode == 13)
-          {
-            $(this).trigger("enterPress");
-          }
-      })
-  });  
-}; 
+  return this.each(function () {
+    $(this).bind('enterPress', fn);
+    $(this).keyup(function (e) {
+      if (e.keyCode == 13) {
+        $(this).trigger("enterPress");
+      }
+    })
+  });
+};
 
 
 
@@ -271,19 +270,19 @@ $(function () {
     data.forEach((o) => {
 
       let template = ticketCardTemplateHtml;
-      
-      
-      
-      keys.forEach((k) => {
-        if(keyword!==""){
 
-          let v = (o[k]+"").replace(keyword,`<span class='keyword-highlight'>${keyword}</span>`);
+
+
+      keys.forEach((k) => {
+        if (keyword !== "") {
+
+          let v = (o[k] + "").replace(keyword, `<span class='keyword-highlight'>${keyword}</span>`);
           template = template.replace(`{{${k}}}`, v);
-        }else{
+        } else {
           template = template.replace(`{{${k}}}`, o[k]);
 
         }
-        
+
 
       });
 
@@ -311,7 +310,7 @@ $(function () {
   $("#btnSearchTicketName").on("click", showSearchResult);
   $("#inputSearchTicketName").focusout(showSearchResult);
   $('#inputSearchTicketName').pressEnter(showSearchResult);
- 
+
 
 
   // event functions
@@ -344,7 +343,13 @@ $(function () {
       // 景點地區中英轉換
       newTicket.area = area[newTicket.area];
 
+      // 轉換數字
+      newTicket.group *= 1;
+      newTicket.price *= 1;
+      newTicket.rate *= 1;
 
+
+      console.log(data);
       data.push(newTicket);
       showTicketCards(data);
       showTicketCardsTotal(data);
@@ -404,7 +409,7 @@ $(function () {
           ((o.name + "").includes(keyword) || (o.description + "").includes(keyword) || (o.price + "").includes(keyword)));
 
       }
-    }else{
+    } else {
 
       // 地區下拉選單未選取或選擇全部地區
       filterData = data.filter(o => (o.name + "").includes(keyword) || (o.description + "").includes(keyword) || (o.price + "").includes(keyword));
