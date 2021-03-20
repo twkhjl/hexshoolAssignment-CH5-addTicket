@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新增旅遊套票</title>
+
+  <!-- font-awesome 5.1.0 -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+    integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <section class="addTicket-panel">
+    <div class="addTicket-img">
+      <img src="https://i.imgur.com/iRssPpJ.png" alt="">
+      <img src="https://i.imgur.com/vJt0znH.png" alt="">
+    </div>
+    <form action="" class="addTicket-form">
+      <h1 class="title"><span><i class="fas fa-plus-circle"></i></span>新增旅遊套票<span></h1>
+      <div class="form-group">
+        <div class="addTicket-input">
+          <label for="ticketName">套票名稱</label>
+          <input type="text" id="ticketName" placeholder="請填寫套票名稱" name="套票名稱">
+        </div>
+        <div class="alert-message">
+          <p id="ticketName-message" data-message="套票名稱">
+            <!-- <i class="fas fa-exclamation-circle"></i>
+                      <span>必填!</span> -->
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="addTicket-input">
+          <label for="ticketImgUrl">圖片網址</label>
+          <input type="text" id="ticketImgUrl" placeholder="請填寫圖片網址" name="圖片網址">
+        </div>
+        <div class="alert-message">
+          <p id="ticketImgUrl-message" data-message="圖片網址">
+            <!-- <i class="fas fa-exclamation-circle"></i>
+                        <span>必填!</span> -->
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="addTicket-input">
+          <label for="ticketRegion">景點地區</label>
+          <select id="ticketRegion" name="景點地區">
+            <option value="" selected hidden>請選擇景點地區</option>
+          </select>
+        </div>
+        <div class="alert-message">
+          <p id="ticketRegion-message" data-message="景點地區">
+            <!-- <i class="fas fa-exclamation-circle"></i>
+                        <span>必填!</span> -->
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="addTicket-input">
+          <label for="ticketPrice">套票金額</label>
+          <input type="number" id="ticketPrice" placeholder="請填寫套票金額" name="套票金額">
+          <!-- <input type="number" id="ticketPrice" placeholder="請填寫套票金額" name="套票金額" min="0"> -->
+        </div>
+        <div class="alert-message">
+          <p id="ticketPrice-message" data-message="套票金額">
+            <!-- <i class="fas fa-exclamation-circle"></i>
+                        <span>必填!</span> -->
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="addTicket-input">
+          <label for="ticketNum">套票組數</label>
+          <input type="number" id="ticketNum" placeholder="請填寫套票組數" name="套票組數">
+          <!-- <input type="number" id="ticketNum" placeholder="請填寫套票組數" name="套票組數" min="1"> -->
+        </div>
+        <div class="alert-message">
+          <p id="ticketNum-message" data-message="套票組數">
+            <!-- <i class="fas fa-exclamation-circle"></i>
+                        <span>必填!</span> -->
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="addTicket-input">
+          <label for="ticketRate">套票星級</label>
+          <input type="number" id="ticketRate" placeholder="請填寫套票星級" name="套票星級">
+          <!-- <input type="number" id="ticketRate" placeholder="請填寫套票星級" name="套票星級" min="1" max="10"> -->
+        </div>
+        <div class="alert-message">
+          <p id="ticketRate-message" data-message="套票星級">
+            <!-- <i class="fas fa-exclamation-circle"></i>
+                        <span>必填!</span> -->
+          </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="addTicket-input">
+          <label for="ticketDescription">套票描述</label>
+          <textarea name="套票描述" id="ticketDescription" placeholder="請填寫套票描述 (限 100 字)"></textarea>
+        </div>
+        <div class="alert-message">
+          <p id="ticketDescription-message" data-message="套票描述">
+            <!-- <i class="fas fa-exclamation-circle"></i>
+                        <span>必填!</span> -->
+          </p>
+        </div>
+      </div>
+      <input type="button" class="addTicket-btn btn" id="btnAddNewTicket" value="新增套票">
+    </form>
+  </section>
+  <section class="main-content">
+    <!-- 搜尋區 -->
+    <div class="search-area">
+      <select name="" class="regionSearch">
+        <option value="地區搜尋" disabled selected hidden>地區搜尋</option>
+        <option value="all">全部地區</option>
+      </select>
+        <p id="searchResult-text">本次搜尋共 <span id="ticketCardsTotal"></span> 筆資料</p>
+      <span>
+        <input type="text" id="inputSearchTicketName" placeholder="輸入關鍵字...">
+        <button class="addTicket-btn btn" id="btnSearchTicketName">搜尋</button>
+      </span>
+    </div>
+    <!-- 套票卡片區 -->
+    <ul class="ticketCard-area"></ul>
+    <!-- 查無關鍵字區 -->
+    <div class="cantFind-area">
+      <h3>查無此關鍵字資料</h3>
+      <img src="https://i.imgur.com/dZI8FJQ.png" alt="">
+    </div>
+  </section>
+
+  <!-- 模板區 -->
+  <!-- 下拉選單選項模板 -->
+  <template id="areaOptionTemplate" style="display:none;">
+    <option value="{{value}}">{{name}}</option>
+  </template>
+  
+  <!-- 套票資料模板 -->
+  <template id="ticketCardTemplate" style="display:none;">
+
+    <li class="ticketCard" cardID="{{id}}">
+      <div class="ticketCard-img">
+        <a href="#">
+          <img src="{{imgUrl}}" alt="">
+        </a>
+        <div class="ticketCard-region">{{area}}</div>
+        <div class="ticketCard-rank">{{rate}}</div>
+      </div>
+      <div class="ticketCard-content">
+        <div>
+          <h3>
+            <a href="#" class="ticketCard-name">{{name}}</a>
+          </h3>
+          <p class="ticketCard-description">
+            {{description}}
+          </p>
+        </div>
+        <div class="ticketCard-info">
+          <p class="ticketCard-num">
+            <span><i class="fas fa-exclamation-circle"></i></span>
+            剩下最後 <span id="ticketCard-num"> {{group}} </span> 組
+          </p>
+          <p class="ticketCard-price">
+            TWD <span id="ticketCard-price">${{price}}</span>
+          </p>
+        </div>
+      </div>
+    </li>
+
+  </template>
+
+  <!-- 搜尋結果總計模板 -->
+  <template id="ticketCardsTotalTemplate" style="display:none;">
+    本次搜尋共  <span id="ticketCardsTotal">{{length}}</span>筆資料
+  </template>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="main.js"></script>
+
+</html>
